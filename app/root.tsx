@@ -10,11 +10,21 @@ import {
 import { MetaFunction } from "@remix-run/node";
 import "./tailwind.css";
 import type { PropsWithChildren } from "react";
-
+import { Header } from "./components/header";
+import { Footer } from "./components/footer";
+const flexClasses = "flex flex-col items-center";
+const spacingClasses =
+  "px-4 md:px-0 md:max-w-2xl lg:max-w-3xl xl:max-w-5xl mx-auto h-[100vh]";
+const proseClasses = "prose lg:prose-xl dark:prose-invert";
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Document>
+      <Header />
       <Outlet />
+      <Footer />
+      <ScrollRestoration />
+      <Scripts />
+      <LiveReload />
     </Document>
   );
 }
@@ -40,7 +50,11 @@ function Document({
         {title ? <title>{title}</title> : null}
         <Links />
       </head>
-      <body>{children}</body>
+      <body
+        className={`dark:bg-slate-900 overflow-y-scroll ${proseClasses} ${flexClasses} ${spacingClasses}`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
