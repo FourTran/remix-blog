@@ -5,23 +5,23 @@ const db = new PrismaClient();
 async function seed() {
   const four = await db.user.create({
     data: {
-      name: "four Tran",
-      userName: "four",
+      name: "four Tran44",
+      userName: "four44",
       // this is a hashed version of "twixrox"
       password: "$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u",
     },
   });
   await Promise.all(
-    getPosts().map((post: any) => {
-      let slug = slugify(post.title);
+    getArticles().map((article: any) => {
+      let slug = slugify(article.title) + "44";
       let now = new Date().toLocaleDateString("en-CA");
-      let summary = post.content.slice(0, 150);
+      let summary = article.content.slice(0, 150);
       const data = {
         slug: slug,
         userId: four.id.toString(),
         formattedDate: now,
         summary: summary,
-        ...post,
+        ...article,
       };
 
       return db.article.create({ data });
@@ -31,7 +31,7 @@ async function seed() {
 
 seed();
 
-function getPosts() {
+function getArticles() {
   return [
     {
       title: "His mother had always taught him",
