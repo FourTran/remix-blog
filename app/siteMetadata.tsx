@@ -7,7 +7,7 @@ export const siteMetadata = {
   image: "",
   author: "Four Tran",
   github: "FourTran",
-  linkedin: "/in/four-tran/",
+  linkedin: "four-tran",
   email: "tranvantu4444@gmail.com",
   professionalTitle: "Senior Software Engineer",
   aboutMe:

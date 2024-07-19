@@ -15,7 +15,7 @@ async function seed() {
     getPosts().map((post: any) => {
       let slug = slugify(post.title);
       let now = new Date().toLocaleDateString("en-CA");
-      let summary = post.content.slice(0, 30);
+      let summary = post.content.slice(0, 150);
       const data = {
         slug: slug,
         userId: four.id.toString(),
