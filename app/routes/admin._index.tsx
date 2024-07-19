@@ -2,7 +2,7 @@ import type { ActionFunction, MetaFunction } from "@remix-run/node";
 import { json, useLoaderData } from "@remix-run/react";
 import { AdminCard } from "~/components/adminCards";
 import { InternalLink } from "~/components/internalLink";
-import { getArticles } from "~/models/article.server";
+import { getArticles, getPagingArticles } from "~/models/article.server";
 import { deleteArticle, getArticleDetail } from "~/models/article.server";
 import { getUser } from "~/utils/session.server";
 export const action: ActionFunction = async ({ request, params }) => {
@@ -22,16 +22,18 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 export const loader = async ({ request }: { request: Request }) => {
   let user = await getUser(request);
-
-  const articles = await getArticles({});
-
+  const url = new URL(request.url);
+  const page = url.searchParams.get("page") ?? 0;
+  const data = await getPagingArticles({ page });
   return json({
-    articles: articles,
+    articles: data.articles,
+    totalPages: data.totalPages,
+    page: data.page,
     user: user,
   });
 };
 export default function Index() {
-  const { articles, user } = useLoaderData<typeof loader>();
+  const { user, articles, page, totalPages } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -45,11 +47,16 @@ export default function Index() {
                 </div>
               </div>
             ))}
+            <div className="mb-16 flex justify-between">
+              {page > 0 && (
+                <InternalLink to={`?page=${page - 1}`}>Previous</InternalLink>
+              )}
+              {page + 1} of {totalPages}
+              {page + 1 < totalPages && (
+                <InternalLink to={`?page=${page + 1}`}>Next</InternalLink>
+              )}
+            </div>
           </div>
-        </div>
-
-        <div className="mb-16 text-right">
-          <InternalLink to="/blogs">Older articles</InternalLink>
         </div>
       </div>
     </>

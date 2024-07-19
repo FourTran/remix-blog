@@ -27,7 +27,6 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   console.log("loader");
   let slug: string = params.slug;
   const article = await getArticleDetail(slug);
-  console.log("ArticleDetail", article);
   if (!article) {
     throw new Error("article not found");
   }

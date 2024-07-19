@@ -26,6 +26,19 @@ export async function getArticles(props: object) {
   return await prisma.article.findMany(props);
 }
 
+export async function getArticleById(id: string) {
+  return await prisma.article.findFirstOrThrow({
+    where: {
+      id: id,
+    },
+    include: {
+      User: {
+        select: { name: true, userName: true },
+      },
+    },
+  });
+}
+
 export async function getArticleDetail(slug: string) {
   return await prisma.article.findFirstOrThrow({
     where: {
@@ -47,10 +60,10 @@ export async function createArticle(
   return await prisma.article.create({ data: data });
 }
 
-export async function deleteArticle(Article: Pick<Article, "id" | "userId">) {
+export async function deleteArticle(id: String) {
   return await prisma.article.delete({
     where: {
-      id: Article.id,
+      id: id,
     },
   });
 }

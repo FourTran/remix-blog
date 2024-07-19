@@ -15,8 +15,7 @@ interface LoaderData {
 export const loader = async ({ request }: { request: Request }) => {
   const url = new URL(request.url);
   const page = url.searchParams.get("page") ?? 0;
-  const data = await getPagingArticles({ page });
-  return data;
+  return await getPagingArticles({ page });
 };
 
 export default function Blog() {
