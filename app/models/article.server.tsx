@@ -31,6 +31,11 @@ export async function getArticleDetail(slug: string) {
     where: {
       slug: slug,
     },
+    include: {
+      User: {
+        select: { name: true, userName: true },
+      },
+    },
   });
 }
 
