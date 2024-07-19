@@ -4,28 +4,27 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
   useRouteError,
 } from "@remix-run/react";
-import { MetaFunction } from "@remix-run/node";
+import { LinksFunction, MetaFunction, json } from "@remix-run/node";
 import "./tailwind.css";
+import styles from "./tailwind.css?url";
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 import type { PropsWithChildren } from "react";
 import { Header } from "./components/header";
 import { Footer } from "./components/footer";
+import { getUser } from "./utils/session.server";
 const flexClasses = "flex flex-col items-center";
 const spacingClasses =
   "px-4 md:px-0 md:max-w-2xl lg:max-w-3xl xl:max-w-5xl mx-auto h-[100vh]";
 const proseClasses = "prose lg:prose-xl dark:prose-invert";
-export function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <Document>
-      <Header />
-      <Outlet />
-      <Footer />
-      <ScrollRestoration />
-      <Scripts />
-    </Document>
-  );
-}
+
+export const loader = async ({ request }: { request: Request }) => {
+  let user = await getUser(request);
+  return json({ user });
+};
+
 function Document({
   children,
   title = "Remix: So great, it's funny!",
@@ -58,7 +57,16 @@ function Document({
 }
 
 export default function App() {
-  return <Outlet />;
+  let { user } = useLoaderData<typeof loader>();
+  return (
+    <Document>
+      <Header user={user} />
+      <Outlet />
+      <Footer />
+      <ScrollRestoration />
+      <Scripts />
+    </Document>
+  );
 }
 
 export function ErrorBoundary() {

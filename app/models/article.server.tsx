@@ -51,7 +51,6 @@ export async function deleteArticle(Article: Pick<Article, "id" | "userId">) {
   return await prisma.article.delete({
     where: {
       id: Article.id,
-      userId: Article.userId,
     },
   });
 }

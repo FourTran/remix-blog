@@ -5,7 +5,7 @@ export const AvatarUser = () => {
       <img
         src={avatar}
         alt="Author's avatar"
-        className="rounded-[50%] my-0 w-8 h-8 sm:w-12 sm:h-12"
+        className="rounded-[50%] my-0 w-6 h-6 sm:w-10 sm:h-10 max-h-[100%]"
         loading="lazy"
       />
     </div>
