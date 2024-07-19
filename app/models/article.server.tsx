@@ -1,6 +1,26 @@
 import { prisma } from "~/utils/db.server";
 import { Article } from "@prisma/client";
 import slugify from "slugify";
+const perpage = 5;
+export async function getPagingArticles({ page = 0 }: { page: Number }) {
+  try {
+    let getpage = parseInt(page);
+    let total = await prisma.article.count();
+    let totalPages = Math.ceil(total / perpage);
+
+    if (getpage + 1 > totalPages) {
+      return { articles: [], totalPages: totalPages, page: getpage };
+    }
+    let articles = await prisma.article.findMany({
+      skip: perpage * getpage,
+      take: perpage,
+      orderBy: { createdAt: "desc" },
+    });
+    return { articles: articles, totalPages: totalPages, page: getpage };
+  } catch (error) {
+    console.log("err getPagingArticles");
+  }
+}
 
 export async function getArticles(props: object) {
   return await prisma.article.findMany(props);

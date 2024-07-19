@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Link, json, useLoaderData } from "@remix-run/react";
+import { json, useLoaderData } from "@remix-run/react";
 import { AvatarUser } from "~/components/avatar";
 import { Card } from "~/components/cards";
 import { InternalLink } from "~/components/internalLink";
@@ -14,15 +14,15 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader = async () => {
-  const posts = await getArticles({});
+  const articles = await getArticles({});
 
   return json({
-    posts: posts,
+    articles: articles,
   });
 };
 
 export default function Index() {
-  const { posts } = useLoaderData<typeof loader>();
+  const { articles } = useLoaderData<typeof loader>();
 
   return (
     <div className="max-w-full prose-h1:mb-0 lg:prose-h1:mb-0  prose-h3:mb-0 lg:prose-h3:mb-0 prose-p:my-2 lg:prose-p:my-2">
@@ -37,10 +37,10 @@ export default function Index() {
 
       <div className="mt-16">
         <div className="not-prose sm:flex flex-wrap">
-          {posts.map((post, index) => (
-            <div key={post.slug} className="sm:w-1/2 mb-12">
+          {articles.map((article, index) => (
+            <div key={article.slug} className="sm:w-1/2 mb-12">
               <div className={index % 2 === 0 ? "sm:mr-6" : "sm:ml-6"}>
-                <Card {...post} />
+                <Card {...article} />
               </div>
             </div>
           ))}
@@ -48,7 +48,7 @@ export default function Index() {
       </div>
 
       <div className="mb-16 text-right">
-        <InternalLink to="/blog">Older posts</InternalLink>
+        <InternalLink to="/blog">Older articles</InternalLink>
       </div>
     </div>
   );
