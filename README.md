@@ -16,7 +16,7 @@ Configuration
 make sure you change value in .env 
 
 ```shellscript
-DATABASE_URL=
+DATABASE_URL= mongodbUrl
 SESSION_SECRET=
 ```
 
