@@ -27,7 +27,12 @@ npx prisma db push
 npx prisma db seed
 
 ```
+default user Login
 
+```shellscript
+userName:"fourTran",
+password:"twixrox"
+```
 
 Run the dev server:
 
