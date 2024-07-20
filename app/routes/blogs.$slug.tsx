@@ -83,7 +83,11 @@ export default function ArticleDetail() {
         <hr className="px-2 py-4 w-2/3 mx-auto text-sm" />
       </header>
       <p className="lead">{article.summary}</p>
-      <div dangerouslySetInnerHTML={{ __html: article.content }}></div>
+
+      <div
+        className="mt-12 prose prose-slate dark:prose-dark"
+        dangerouslySetInnerHTML={{ __html: article.content }}
+      ></div>
     </article>
   );
 }
