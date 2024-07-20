@@ -1,8 +1,33 @@
-# Welcome to Remix!
+# Welcome to Blog!
 
-- 📖 [Remix docs](https://remix.run/docs)
+Remix-Blog is a blog template built using remix ,Vite , prisma, mongodb and TailwindCSS.  You can clone it and start your own blog in a few minutes. Check out the documentation below to get started.
+
+If you face any issues or have any suggestions, please open an issue!
 
 ## Development
+
+Once you've created the project you have to install the dependencies:
+
+```shellscript
+npm install
+```
+
+Configuration
+make sure you change value in .env 
+
+```shellscript
+DATABASE_URL=
+SESSION_SECRET=
+```
+
+Init database
+```shellscript
+npx prisma db push
+
+npx prisma db seed
+
+```
+
 
 Run the dev server:
 
