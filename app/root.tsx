@@ -47,11 +47,7 @@ function Document({
         {title ? <title>{title}</title> : null}
         <Links />
       </head>
-      <body
-        className={`dark:bg-slate-900 overflow-y-scroll ${proseClasses} ${flexClasses} ${spacingClasses}`}
-      >
-        {children}
-      </body>
+      <body className={`dark:bg-slate-900 overflow-y-scroll `}>{children}</body>
     </html>
   );
 }
