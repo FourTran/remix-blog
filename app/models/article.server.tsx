@@ -56,7 +56,21 @@ export async function createArticle(
   article: Pick<Article, "title" | "content" | "summary" | "tags" | "userId">
 ) {
   let slug = slugify(article.title);
-  const data = { slug: slug, ...article };
+  const data = {
+    slug: slug,
+    title: article.title,
+    content: article.content,
+    summary: article.summary,
+    tags: article.tags,
+    userId: article.userId,
+    formattedDate: new Date().toLocaleDateString("en", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }),
+  };
+
+  console.log("data", data);
   return await prisma.article.create({ data: data });
 }
 

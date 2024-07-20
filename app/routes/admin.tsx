@@ -15,7 +15,6 @@ interface LoaderData {
 
 export const loader = async ({ request }: { request: Request }) => {
   let user = await getUser(request);
-  console.log("user", user);
   if (!user) {
     return redirect("/login");
   }
@@ -33,7 +32,7 @@ export default function AdminBlogs() {
         </Link>
         <Link
           prefetch="intent"
-          to="/admin/blogs/new"
+          to="/admin/blog/new"
           className=" md:text-lg border bg-sky-500 rounded-xl text-md text-white md:px-4 md:py-2 px-2 py-1"
         >
           Create Article

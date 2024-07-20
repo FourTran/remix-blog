@@ -20,7 +20,6 @@ export const ArticlesList = ({
   nextPage,
   totalPages,
 }: Props) => {
-  console.log("articles", articles);
   return (
     <div className="prose-h3:mb-0 lg:prose-h3:mb-0 prose-p:my-2 lg:prose-p:my-2">
       {articles.length >= 1 ? (
