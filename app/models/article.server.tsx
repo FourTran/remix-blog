@@ -70,8 +70,25 @@ export async function createArticle(
     }),
   };
 
-  console.log("data", data);
   return await prisma.article.create({ data: data });
+}
+export async function updateArticle(
+  article: Pick<
+    Article,
+    "title" | "content" | "summary" | "tags" | "userId" | "id"
+  >
+) {
+  console.log("article", article);
+  let slug = slugify(article.title);
+  const data = {
+    slug: slug,
+    title: article.title,
+    content: article.content,
+    summary: article.summary,
+    tags: article.tags,
+  };
+
+  return await prisma.article.update({ where: { id: article.id }, data });
 }
 
 export async function deleteArticle(id: String) {

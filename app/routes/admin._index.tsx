@@ -47,16 +47,16 @@ export default function Index() {
                 </div>
               </div>
             ))}
-            <div className="mb-16 flex justify-between">
-              {page > 0 && (
-                <InternalLink to={`?page=${page - 1}`}>Previous</InternalLink>
-              )}
-              {page + 1} of {totalPages}
-              {page + 1 < totalPages && (
-                <InternalLink to={`?page=${page + 1}`}>Next</InternalLink>
-              )}
-            </div>
           </div>
+        </div>
+        <div className="mb-16 flex justify-between">
+          {page > 0 && (
+            <InternalLink to={`?page=${page - 1}`}>Previous</InternalLink>
+          )}
+          {page + 1} of {totalPages}
+          {page + 1 < totalPages && (
+            <InternalLink to={`?page=${page + 1}`}>Next</InternalLink>
+          )}
         </div>
       </div>
     </>

@@ -25,7 +25,7 @@ export default function AdminBlogs() {
   let { user } = useLoaderData<typeof loader>();
 
   return (
-    <div className="w-full">
+    <div className="px-4 md:px-0 md:max-w-2xl lg:max-w-3xl xl:max-w-5xl mx-auto ">
       <div className="flex justify-between items-center py-5">
         <Link prefetch="intent" to="/admin">
           <h3 className="md:text-2xl text-md text-blue-500">Blogs Board</h3>
